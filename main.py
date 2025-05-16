@@ -15,8 +15,6 @@ import traceback
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
-# BOT_TOKEN = "8174052403:AAFmaix3loe7-5GeafwNbc_GEJuGsefCnmo"
-# CHAT_ID = "610822492"
 
 SYMBOL_DATA = {
     "TIBBIR": ('base', '0x0c3b466104545efa096b8f944c1e524e1d0d4888')
@@ -37,7 +35,7 @@ SPREAD_REFRESH_INTERVAL = interval_map[tfr]
 PRICE_REFRESH_INTERVAL = 2
 
 # Strayegy:
-WINDOW=60 # minute
+WINDOW = 1440 # minute
 HIST_SPREAD_LIMIT = 10_000
 DIRECTION_MODE = 3 # 1 -- Long only, 2 -- Short only, 3 -- Long + Short:
 DEVIATION = 0.89 # hvh
@@ -50,7 +48,7 @@ CALC_SPREAD_METHOD = 'a'
 
 # Utils:
 TMZ = "Europe/Kyiv"
-PLOT_WINDOW = 60 # minute
+PLOT_WINDOW = 1440 # minute
 SAVE_TO_FILE = False
 
 # def generate_mock_spread_data(count=1440, spread_range=(-4, 1)) -> list[tuple[str, float]]:
@@ -311,7 +309,7 @@ class Main():
                         continue
                     
                     dt_str = self.time_control.get_date_time_now()
-                    plot_bytes = self.spread_plotter.generate_plot_image(dt_str, list(self.spread_pct_data), style=4)                    
+                    plot_bytes = self.spread_plotter.generate_plot_image(dt_str, list(self.spread_pct_data), style=1)                    
                     for position_side, action in instruction:
                         if action in {"is_opening", "is_closing"}:              
                             msg = self.format_signal_message(
